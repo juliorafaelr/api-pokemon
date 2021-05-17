@@ -5,7 +5,10 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 [![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We
+believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain
+out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction,
+queueing, and caching.
 
 # Api Pokemon Endpoints
 
@@ -88,6 +91,20 @@ param | type | description
 --- | --- | ---  
 uuid | `string` | pokemon uuid
 
-## Unit Test
+## Deployment
 
-path `test/PokemonTest.php`
+- clone the repo and `cd api-pokemon`
+- run `composer install`
+- run `cp .env.example .env`
+- create empty file `database.sqlite` on `./database`
+- run `php artisan  migrate --seed`
+
+should work out of the box.
+
+you could change some values on the .env like the environment .etc
+
+## unit test
+
+if you want to run the unit test run ` ./vendor/bin/phpunit` on the root of the project
+
+unit test path `tests/PokemonTest.php`
