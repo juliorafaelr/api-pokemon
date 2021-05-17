@@ -40,7 +40,7 @@ class PokemonController extends Controller
             'legendary' => 'boolean'
         ];
 
-        $invalidKeys = array_keys(array_diff_key($request->json()->all(), $rules));
+        $invalidKeys = array_keys(array_diff_key($request->all(), $rules));
 
         $this->validate($request, $rules);
 
@@ -182,7 +182,6 @@ class PokemonController extends Controller
     public function show($uuid): JsonResponse
     {
         return response()->json(Pokemon::findOrFail($uuid)->toArray());
-
     }
 
     /**
