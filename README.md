@@ -7,18 +7,87 @@
 
 Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
 
-## Official Documentation
+# Api Pokemon Endpoints
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+### GET `https://pokemon.widutech.com/api/pokemons`
 
-## Contributing
+Parameters
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+param | type | description
+--- | --- | ---
+q | `string` | match if `name` or `type_1` or `type_2` contains `q`
+page | `integer` | return selected page `(default 0)`
+per_page | `integer` | number of rows to be returned `(default 100)`
+num | `integer` | exact match on `num` field
+name | `string` | exact match on `name` field
+type_1 | `string` | exact match on `type_1` field
+type_2 | `string` | exact match on `type_2` field
+total | `integer` | exact match on `total` field
+hp | `integer` | exact match on `hp` field
+attack | `integer` | exact match on `attack` field
+defense | `integer` | exact match on `defense` field
+sp_atk | `integer` | exact match on `sp_atk` field
+sp_def | `integer` | exact match on `sp_def` field
+speed | `integer` | exact match on `speed` field
+generation | `integer` | exact match on `generation` field
+legendary | `boolean` | exact match on `legendary` field
 
-## Security Vulnerabilities
+### GET `https://pokemon.widutech.com/api/pokemons/<uuid>`
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+Parameters
 
-## License
+param | type | description
+--- | --- | ---  
+uuid | `string` | pokemon uuid
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### POST `https://pokemon.widutech.com/api/pokemons/create`
+
+Parameters
+
+param | type | description
+--- | --- | ---
+num | `integer (required)` |
+name | `string (required)` |
+type_1 | `string (require)`| **valid values** `Grass`,`Fire`,`Water`,`Bug`,`Normal`,`Poison`,`Electric`,`Ground`,`Fairy`,`Fighting`,`Psychic`,`Rock`,`Ghost`,`Ice`,`Dragon`,`Dark`,`Steel`,`Flying`
+type_2 | `string` | **valid values** `Grass`,`Fire`,`Water`,`Bug`,`Normal`,`Poison`,`Electric`,`Ground`,`Fairy`,`Fighting`,`Psychic`,`Rock`,`Ghost`,`Ice`,`Dragon`,`Dark`,`Steel`,`Flying`
+total | `integer` |
+hp | `integer` |
+attack | `integer` |
+defense | `integer` |
+sp_atk | `integer` |
+sp_def | `integer` |
+speed | `integer` |
+generation | `integer` |
+legendary | `boolean` | Default `false`
+
+### PUT `https://pokemon.widutech.com/api/pokemons/<uuid>/update`
+
+Parameters
+
+param | type | description
+--- | --- | ---
+num | `integer` |
+name | `string` |
+type_1 | `string`| **valid values** `Grass`,`Fire`,`Water`,`Bug`,`Normal`,`Poison`,`Electric`,`Ground`,`Fairy`,`Fighting`,`Psychic`,`Rock`,`Ghost`,`Ice`,`Dragon`,`Dark`,`Steel`,`Flying`
+type_2 | `string` | **valid values** `Grass`,`Fire`,`Water`,`Bug`,`Normal`,`Poison`,`Electric`,`Ground`,`Fairy`,`Fighting`,`Psychic`,`Rock`,`Ghost`,`Ice`,`Dragon`,`Dark`,`Steel`,`Flying`
+total | `integer` |
+hp | `integer` |
+attack | `integer` |
+defense | `integer` |
+sp_atk | `integer` |
+sp_def | `integer` |
+speed | `integer` |
+generation | `integer` |
+legendary | `boolean` |
+
+### DELETE `https://pokemon.widutech.com/api/pokemons/<uuid>/delete`
+
+Parameters
+
+param | type | description
+--- | --- | ---  
+uuid | `string` | pokemon uuid
+
+## Unit Test
+
+path `test/PokemonTest.php`
