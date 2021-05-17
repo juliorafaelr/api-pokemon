@@ -96,7 +96,7 @@ class PokemonController extends Controller
         $rules = [
             'num' => 'required|integer',
             'name' => 'required|string|max:150',
-            'type_1' => 'string|in:Grass,Fire,Water,Bug,Normal,Poison,Electric,Ground,Fairy,Fighting,Psychic,Rock,Ghost,Ice,Dragon,Dark,Steel,Flying',
+            'type_1' => 'required|string|in:Grass,Fire,Water,Bug,Normal,Poison,Electric,Ground,Fairy,Fighting,Psychic,Rock,Ghost,Ice,Dragon,Dark,Steel,Flying',
             'type_2' => 'string|in:Grass,Fire,Water,Bug,Normal,Poison,Electric,Ground,Fairy,Fighting,Psychic,Rock,Ghost,Ice,Dragon,Dark,Steel,Flying',
             'total' => 'integer',
             'hp' => 'integer',
