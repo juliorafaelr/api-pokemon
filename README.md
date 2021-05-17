@@ -98,6 +98,7 @@ uuid | `string` | pokemon uuid
 - run `cp .env.example .env`
 - create empty file `database.sqlite` on `./database`
 - run `php artisan  migrate --seed`
+- run `php -S localhost:8000 -t public` to start the local server
 
 should work out of the box.
 
