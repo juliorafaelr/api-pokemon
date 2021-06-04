@@ -61,6 +61,8 @@ $app->singleton(
 
 $app->configure('app');
 
+$app->configure('services');
+
 /*
 |--------------------------------------------------------------------------
 | Register Middleware
@@ -111,5 +113,7 @@ $app->router->group([
 ], function($router) {
     require __DIR__ . '/../routes/web.php';
 });
+
+$app->register('Sentry\Laravel\ServiceProvider');
 
 return $app;

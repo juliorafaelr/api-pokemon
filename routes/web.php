@@ -24,6 +24,10 @@ $router->group(['prefix' => 'api'], function() use ($router) {
     $router->delete('pokemons/{uuid}/delete', ['uses' => 'PokemonController@destroy']);
 
     $router->put('pokemons/{uuid}/update', ['uses' => 'PokemonController@update']);
+
+    $router->post('sentry', ['uses' => 'SentryController@index']);
+
+    $router->get('sentry/test', ['uses' => 'SentryController@test']);
 });
 
 
