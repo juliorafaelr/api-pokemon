@@ -57,9 +57,6 @@ class SentryController extends Controller
             ]
         ];
 
-        echo(json_encode($message));
-        exit;
-
         Http::post($slackWebhook, $message);
 
         return response()->json(['message' => 'ok']);
