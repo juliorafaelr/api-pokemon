@@ -41,7 +41,7 @@ class SentryController extends Controller
                         ],
                         [
                             'type' => 'mrkdwn',
-                            'text' => '*Link*\\n:<' . data_get($request, 'url') . '|sentry>'
+                            'text' => '*Link:*\\n<' . data_get($request, 'url') . '|sentry>'
                         ]
                     ]
                 ],
