@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 class SentryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * send sentry message to slack
      *
      * @param Request $request
      *
@@ -22,15 +22,48 @@ class SentryController extends Controller
 
         $slackWebhook = config('services.slack.webhook_url');
 
-        Log::info(json_encode($request));
+        $message = [
+            'blocks' => [
+                [
+                    'type' => 'header',
+                    'text' => [
+                        'type' => 'plain_text',
+                        'text' => data_get($request, 'message'),
+                        'emoji' => true
+                    ]
+                ],
+                [
+                    'type' => 'section',
+                    'fields' => [
+                        [
+                            'type' => 'mrkdwn',
+                            'text' => '*Project=>*\n' . data_get($request, 'project')
+                        ],
+                        [
+                            'type' => 'mrkdwn',
+                            'text' => '*link=>*\n<' . data_get($request, 'url') . '|sentry>'
+                        ]
+                    ]
+                ],
+                [
+                    'type' => 'section',
+                    'fields' => [
+                        [
+                            'type' => 'mrkdwn',
+                            'text' => '*environment=>*\n' . data_get($request, 'event.environment')
+                        ]
+                    ]
+                ]
+            ]
+        ];
 
-        return response()->json($request);
+        Http::post($slackWebhook,$message);
+
+        return response()->json(['message' => 'ok']);
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
+     * test sentry exception
      *
      * @return JsonResponse
      *
