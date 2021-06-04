@@ -37,11 +37,11 @@ class SentryController extends Controller
                     'fields' => [
                         [
                             'type' => 'mrkdwn',
-                            'text' => '*Project:*\n' . data_get($request, 'project')
+                            'text' => '*Project:*\\n' . data_get($request, 'project')
                         ],
                         [
                             'type' => 'mrkdwn',
-                            'text' => '*link:*\n<' . data_get($request, 'url') . '|sentry>'
+                            'text' => '*Link*\\n:<' . data_get($request, 'url') . '|sentry>'
                         ]
                     ]
                 ],
@@ -50,7 +50,7 @@ class SentryController extends Controller
                     'fields' => [
                         [
                             'type' => 'mrkdwn',
-                            'text' => '*environment:*\n' . data_get($request, 'event.environment')
+                            'text' => '*Environment:*\\n' . data_get($request, 'event.environment')
                         ]
                     ]
                 ]
