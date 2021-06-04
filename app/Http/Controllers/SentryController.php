@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SentryController extends Controller
 {
@@ -21,8 +22,7 @@ class SentryController extends Controller
 
         $slackWebhook = config('services.slack.webhook_url');
 
-        var_dump($slackWebhook);
-        exit;
+        Log::info(json_encode($request));
 
         return response()->json($request);
     }
