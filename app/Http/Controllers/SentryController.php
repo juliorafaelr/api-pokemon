@@ -37,11 +37,11 @@ class SentryController extends Controller
                     'fields' => [
                         [
                             'type' => 'mrkdwn',
-                            'text' => '*Project:*\\n' . data_get($request, 'project')
+                            'text' => '*Project:*\n' . data_get($request, 'project')
                         ],
                         [
                             'type' => 'mrkdwn',
-                            'text' => '*Link:*\\n<' . data_get($request, 'url') . '|sentry>'
+                            'text' => '*Link:*\n<' . data_get($request, 'url') . '|sentry>'
                         ]
                     ]
                 ],
@@ -50,12 +50,15 @@ class SentryController extends Controller
                     'fields' => [
                         [
                             'type' => 'mrkdwn',
-                            'text' => '*Environment:*\\n' . data_get($request, 'event.environment')
+                            'text' => '*Environment:*\n' . data_get($request, 'event.environment')
                         ]
                     ]
                 ]
             ]
         ];
+
+        echo(json_encode($message));
+        exit;
 
         Http::post($slackWebhook, $message);
 
