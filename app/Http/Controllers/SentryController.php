@@ -22,36 +22,66 @@ class SentryController extends Controller
 
         $slackWebhook = config('services.slack.webhook_url');
 
+        $title = data_get($request, 'event.title');
+
+        $project = data_get($request, 'project');
+
+        $url = data_get($request, 'url');
+
+        $env = data_get($request, 'event.environment');
+
+        $trace = data_get($request, 'event.stacktrace.frames');
+
+        $contextString = json_encode(data_get($request, 'event.contexts'), JSON_PRETTY_PRINT);
+
+        $lastTraceInApp = [];
+
+        foreach ($trace as $step) {
+            if ($step['in_app']) {
+                $lastTraceInApp['function'] = $step['function'];
+                $lastTraceInApp['filename'] = $step['filename'];
+                $lastTraceInApp['lineno'] = $step['lineno'];
+                $lastTraceInApp['context_line'] = $step['context_line'];
+
+                break;
+            }
+        }
+
+        $lastTraceString = json_encode($lastTraceInApp, JSON_PRETTY_PRINT);
+
+
         $message = [
-            'blocks' => [
+            "embeds" => [
                 [
-                    'type' => 'header',
-                    'text' => [
-                        'type' => 'plain_text',
-                        'text' => data_get($request, 'event.title'),
-                        'emoji' => true
-                    ]
-                ],
-                [
-                    'type' => 'section',
-                    'fields' => [
+                    "title" => "[Sentry Error Report]($url)",
+                    "description" => $title,
+                    "color" => 16711680,
+                    "fields" => [
                         [
-                            'type' => 'mrkdwn',
-                            'text' => "*Project:*\n" . data_get($request, 'project')
+                            "name" => "Project",
+                            "value" => $project
                         ],
                         [
-                            'type' => 'mrkdwn',
-                            'text' => "*Link:*\n<" . data_get($request, 'url') . "|sentry>"
-                        ]
-                    ]
-                ],
-                [
-                    'type' => 'section',
-                    'fields' => [
+                            "name" => "Environment",
+                            "value" => $env
+                        ],
                         [
-                            'type' => 'mrkdwn',
-                            'text' => "*Environment:*\n" . data_get($request, 'event.environment')
+                            "name" => "Stack Trace",
+                            "value" => "
+                            ```
+                            $lastTraceString
+                            ```"
+                        ],
+                        [
+                            "name" => "context",
+                            "value" => "
+                            ```
+                           $contextString
+                            ```"
                         ]
+                    ],
+                    "footer" => [
+                        "text" => "Error reported by Sentry",
                     ]
                 ]
             ]
