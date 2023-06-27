@@ -53,16 +53,12 @@ class SentryController extends Controller
         $message = [
             "embeds" => [
                 [
-                    "title" => "Sentry Error Report",
+                    "title" => $project,
                     "color" => 16711680,
                     "fields" => [
                         [
                             "name" => "Exception",
                             "value" => "[$title]($url)"
-                        ],
-                        [
-                            "name" => "Project",
-                            "value" => $project
                         ],
                         [
                             "name" => "Environment",
@@ -71,16 +67,12 @@ class SentryController extends Controller
                         [
                             "name" => "Stack Trace",
                             "value" => "
-                            ```
-                            $lastTraceString
-                            ```"
+                            ```$lastTraceString```"
                         ],
                         [
                             "name" => "context",
                             "value" => "
-                            ```
-                            $contextString
-                            ```"
+                            ```$contextString```"
                         ]
                     ],
                     "footer" => [
