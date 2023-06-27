@@ -21,8 +21,6 @@ class SentryController extends Controller
     {
         $request = $request->json()->all();
 
-        Log::info(json_encode($request));
-
         $slackWebhook = config('services.slack.webhook_url');
 
         $title = data_get($request, 'event.title');
@@ -33,7 +31,9 @@ class SentryController extends Controller
 
         $env = data_get($request, 'event.environment');
 
-        $trace = data_get($request, 'event.stacktrace.frames');
+        $trace = data_get($request, 'event.breadcrumbs.values');
+
+        Log::info($trace);
 
         $contextString = json_encode(data_get($request, 'event.contexts'), JSON_PRETTY_PRINT);
 
