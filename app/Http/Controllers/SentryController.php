@@ -31,7 +31,7 @@ class SentryController extends Controller
 
         $env = data_get($request, 'event.environment');
 
-        $trace = data_get($request, 'event.breadcrumbs.values');
+        $trace = data_get($request, 'event.exception.values.0.stacktrace.frames');
 
         Log::info($trace);
 
@@ -45,8 +45,6 @@ class SentryController extends Controller
                 $lastTraceInApp['filename'] = $step['filename'];
                 $lastTraceInApp['lineno'] = $step['lineno'];
                 $lastTraceInApp['context_line'] = $step['context_line'];
-
-                break;
             }
         }
 
