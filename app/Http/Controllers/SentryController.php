@@ -33,7 +33,7 @@ class SentryController extends Controller
 
         $trace = data_get($request, 'event.exception.values.0.stacktrace.frames', []);
 
-        $contextString = json_encode(data_get($request, 'event.contexts'), JSON_PRETTY_PRINT);
+        $contextString = json_encode(data_get($request, 'event.contexts', []), JSON_PRETTY_PRINT);
 
         $lastTraceInApp = [];
 
