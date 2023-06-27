@@ -53,7 +53,7 @@ class SentryController extends Controller
         $message = [
             "embeds" => [
                 [
-                    "title" => $project,
+                    "title" => "Sentry - $project",
                     "color" => 16711680,
                     "fields" => [
                         [
