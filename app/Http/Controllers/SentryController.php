@@ -31,11 +31,7 @@ class SentryController extends Controller
 
         $env = data_get($request, 'event.environment');
 
-        $trace = data_get($request, 'event.exception.values.0.stacktrace.frames');
-
-        Log::info($trace);
-
-        exit;
+        $trace = data_get($request, 'event.exception.values.0.stacktrace.frames', []);
 
         $contextString = json_encode(data_get($request, 'event.contexts'), JSON_PRETTY_PRINT);
 
@@ -50,7 +46,6 @@ class SentryController extends Controller
         }
 
         $lastTraceString = json_encode($lastTraceInApp, JSON_PRETTY_PRINT);
-
 
         $message = [
             "embeds" => [
