@@ -43,7 +43,6 @@ class SentryController extends Controller
 
         foreach ($trace as $step) {
             if ($step['in_app']) {
-                $lastTraceInApp['function'] = $step['function'];
                 $lastTraceInApp['filename'] = $step['filename'];
                 $lastTraceInApp['lineno'] = $step['lineno'];
                 $lastTraceInApp['context_line'] = $step['context_line'];
