@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class SentryController extends Controller
 {
@@ -82,6 +83,10 @@ class SentryController extends Controller
                 ]
             ]
         ];
+
+        Log::info(json_encode($message));
+
+        Log::info(json_encode($request));
 
         Http::post($slackWebhook, $message);
 
