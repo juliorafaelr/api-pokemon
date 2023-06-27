@@ -35,6 +35,8 @@ class SentryController extends Controller
 
         Log::info($trace);
 
+        exit;
+
         $contextString = json_encode(data_get($request, 'event.contexts'), JSON_PRETTY_PRINT);
 
         $lastTraceInApp = [];
