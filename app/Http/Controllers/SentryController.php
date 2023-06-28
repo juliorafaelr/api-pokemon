@@ -45,6 +45,14 @@ class SentryController extends Controller
             }
         }
 
+        if (!empty($trace) && empty($lastTraceInApp)) {
+            $step = end($trace);
+
+            $lastTraceInApp['filename'] = $step['filename'];
+            $lastTraceInApp['lineno'] = $step['lineno'];
+            $lastTraceInApp['context_line'] = $step['context_line'];
+        }
+
         $lastTraceString = json_encode($lastTraceInApp, JSON_PRETTY_PRINT);
 
         $message = [
