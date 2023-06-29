@@ -39,18 +39,18 @@ class SentryController extends Controller
 
         foreach ($trace as $step) {
             if ($step['in_app']) {
-                $lastTraceInApp['filename'] = $step['filename'];
-                $lastTraceInApp['lineno'] = $step['lineno'];
-                $lastTraceInApp['context_line'] = $step['context_line'];
+                $lastTraceInApp['filename'] = data_get($step, 'filename', '');
+                $lastTraceInApp['lineno'] = data_get($step, 'lineno', '');
+                $lastTraceInApp['context_line'] = data_get($step, 'context_line', '');
             }
         }
 
         if (!empty($trace) && empty($lastTraceInApp)) {
             $step = end($trace);
 
-            $lastTraceInApp['filename'] = $step['filename'];
-            $lastTraceInApp['lineno'] = $step['lineno'];
-            $lastTraceInApp['context_line'] = $step['context_line'];
+            $lastTraceInApp['filename'] = data_get($step, 'filename', '');
+            $lastTraceInApp['lineno'] = data_get($step, 'lineno', '');
+            $lastTraceInApp['context_line'] = data_get($step, 'context_line', '');
         }
 
         $lastTraceString = json_encode($lastTraceInApp, JSON_PRETTY_PRINT);
